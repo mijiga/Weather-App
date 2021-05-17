@@ -13,7 +13,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-            android:text="27&#xb0;"
+            tools:text="27&#xb0;"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -23,7 +23,7 @@
             android:id="@+id/textView10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="max"
+            android:text="@string/max"
             app:layout_constraintEnd_toEndOf="@+id/maxTemperature"
             app:layout_constraintStart_toStartOf="@+id/maxTemperature"
             app:layout_constraintTop_toBottomOf="@+id/maxTemperature" />
@@ -32,7 +32,7 @@
             android:id="@+id/textView8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Current"
+            android:text="@string/current"
             app:layout_constraintEnd_toEndOf="@+id/currentTemperature"
             app:layout_constraintStart_toStartOf="@+id/currentTemperature"
             app:layout_constraintTop_toBottomOf="@+id/currentTemperature" />
@@ -42,7 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="25&#xb0;"
+            tools:text="25&#xb0;"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -81,14 +81,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView2"
-            android:text="25&#xb0;" />
+            tools:text="25&#xb0;" />
 
         <TextView
             android:id="@+id/currentState"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="0dp"
-            android:text="SUNNY"
+            tools:text="SUNNY"
             android:textAllCaps="true"
             android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="@+id/mainTemperature"
@@ -111,7 +111,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="10dp"
-            android:text="19&#xb0;"
+            tools:text="19&#xb0;"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -121,7 +121,7 @@
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="min"
+            android:text="@string/min"
             app:layout_constraintEnd_toEndOf="@+id/minTemperature"
             app:layout_constraintStart_toStartOf="@+id/minTemperature"
             app:layout_constraintTop_toBottomOf="@+id/minTemperature" />
