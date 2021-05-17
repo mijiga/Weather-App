@@ -16,10 +16,11 @@ interface WeatherAPI {
         @Query("appid") appid: String = API_KEY
     ): CurrentWeather
 
-    @GET("forecast?")
+    @GET("forecast/daily?")
     suspend fun getForecast(
         @Query("lat") lat: Double,
         @Query("lon") lon: Double,
+        @Query("cnt") cnt: Int = 5,
         @Query("units") units: String = "metric",
         @Query("appid") appid: String = API_KEY
     ): ForecastResponse

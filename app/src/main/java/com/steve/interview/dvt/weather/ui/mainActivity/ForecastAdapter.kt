@@ -1,7 +1,6 @@
 package com.steve.interview.dvt.weather.ui.mainActivity
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +8,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.steve.interview.dvt.weather.R
 import com.steve.interview.dvt.weather.data.model.CurrentWeather
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class ForecastAdapter : RecyclerView.Adapter<ForecastAdapter.ViewHolder>() {
 
@@ -27,6 +29,8 @@ class ForecastAdapter : RecyclerView.Adapter<ForecastAdapter.ViewHolder>() {
         val weather = list[position]
 
         holder.tempView.text = weather.main.temp.toString()//TODO: Need the degree symbol
+
+        holder.dayView.text = weather.getDay()
 
     }
 

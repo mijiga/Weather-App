@@ -28,7 +28,6 @@ class MainViewModel @Inject constructor(private val weatherRepository: WeatherRe
 
     fun getForecast(lat: Double, lon: Double) = viewModelScope.launch {
         forecast.postValue(weatherRepository.getForecast(lat, lon))
-        println("the forecast ${weatherRepository.getForecast(lat, lon)}")
     }
 
 }
