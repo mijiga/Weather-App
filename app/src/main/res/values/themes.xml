@@ -17,4 +17,22 @@
         <item name="android:colorBackground">@color/sunny_primary</item>
 
     </style>
+
+    <style name="Theme.Cloudy" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/cloudy_primary</item>
+        <item name="colorPrimaryVariant">@color/cloudy_primary_dark</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">@color/cloudy_primary_light</item>
+        <!-- Customize your theme here. -->
+        <item name="android:textColor">@color/white</item>
+
+        <item name="android:colorBackground">@color/cloudy_primary</item>
+
+    </style>
 </resources>

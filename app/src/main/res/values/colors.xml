@@ -11,4 +11,12 @@
     <color name="sunny_primary">#47AB2F</color>
     <color name="sunny_primary_dark">#007a00</color>
     <color name="sunny_primary_light">#7cdc5e</color>
+
+    <color name="cloudy_primary">#54717a</color>
+    <color name="cloudy_primary_dark">#29464e</color>
+    <color name="cloudy_primary_light">#819fa9</color>
+
+    <color name="rainy_primary">#57575d</color>
+    <color name="rainy_primary_dark">#2e2e34</color>
+    <color name="rainy_primary_light">#84848a</color>
 </resources>
