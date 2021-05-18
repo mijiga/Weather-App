@@ -6,16 +6,18 @@ import androidx.lifecycle.viewModelScope
 import com.steve.interview.dvt.weather.data.model.CurrentWeather
 import com.steve.interview.dvt.weather.data.model.ForecastResponse
 import com.steve.interview.dvt.weather.data.repository.WeatherRepository
+import com.steve.interview.dvt.weather.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(private val weatherRepository: WeatherRepository) :
-    ViewModel() {//TODO: Check if theres any point of adding the @Inject notation
+    ViewModel() {
 
-    val currentWeather: MutableLiveData<CurrentWeather> = MutableLiveData()
-    val forecast: MutableLiveData<ForecastResponse> = MutableLiveData()
+    val currentWeather: MutableLiveData<Resource<CurrentWeather>> = MutableLiveData()
+    val forecast: MutableLiveData<Resource<ForecastResponse>> = MutableLiveData()
 
     init {
         this.getCurrentWeather(-13.9669,33.7873)
@@ -23,11 +25,31 @@ class MainViewModel @Inject constructor(private val weatherRepository: WeatherRe
     }
 
     fun getCurrentWeather(lat: Double, lon: Double) = viewModelScope.launch {
-        currentWeather.postValue(weatherRepository.getCurrentWeather(lat, lon))
+        val response = weatherRepository.getCurrentWeather(lat, lon)
+        currentWeather.postValue(handleCurrentWeatherResponse(response))
     }
 
     fun getForecast(lat: Double, lon: Double) = viewModelScope.launch {
-        forecast.postValue(weatherRepository.getForecast(lat, lon))
+        val response = weatherRepository.getForecast(lat, lon)
+        forecast.postValue(handleForecastResponse(response))
+    }
+
+    private fun handleCurrentWeatherResponse(response: Response<CurrentWeather>) : Resource<CurrentWeather>{
+        if(response.isSuccessful){
+            response.body()?.let {
+                return Resource.Success(it)
+            }
+        }
+        return Resource.Error(response.message())
+    }
+
+    private fun handleForecastResponse(response: Response<ForecastResponse>) : Resource<ForecastResponse> {
+        if(response.isSuccessful){
+            response.body()?.let {
+                return Resource.Success(it)
+            }
+        }
+        return Resource.Error(response.message())
     }
 
 }
