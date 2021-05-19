@@ -15,6 +15,7 @@ import com.steve.interview.dvt.weather.data.model.ForecastResponse
 import com.steve.interview.dvt.weather.data.repository.ThemeRepository
 import com.steve.interview.dvt.weather.data.repository.WeatherRepository
 import com.steve.interview.dvt.weather.databinding.ActivityMainBinding
+import com.steve.interview.dvt.weather.util.Constants
 import com.steve.interview.dvt.weather.util.Resource
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -28,6 +29,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var retrofit: WeatherAPI
     @Inject
     lateinit var sharedPreferences: SharedPreferences
+
     private lateinit var binding: ActivityMainBinding
     private lateinit var adapter: ForecastAdapter
 
@@ -43,13 +45,12 @@ class MainActivity : AppCompatActivity() {
         binding.forecastRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.forecastRecyclerView.adapter = adapter
 
-
         viewModel.currentWeather.observe(this, {
             setupViews(it)
         })
 
         viewModel.forecast.observe(this, {
-            setupRecycler(it)
+            setupRecyclerView(it)
         })
 
         viewModel.isDifferentTheme.observe(this, {
@@ -61,7 +62,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun setupRecycler(resource: Resource<ForecastResponse>){
+    private fun setupRecyclerView(resource: Resource<ForecastResponse>){
         when(resource){
             is Resource.Success -> {
                 resource.data?.let {
@@ -85,6 +86,7 @@ class MainActivity : AppCompatActivity() {
                     binding.minTemperature.text = doubleToTemp(it.main.temp_min)
                     binding.maxTemperature.text = doubleToTemp(it.main.temp_max)
                     binding.currentState.text = it.weather[0].main
+                    setupImage(it.weather[0].id)
                 }
             }
             is Resource.Error -> {
@@ -99,7 +101,27 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun doubleToTemp(temp: Double): String {//TODO: This doesn't belong in this class - maybe a extension function to the Double class?
+    private fun setupImage(weatherCode: Int){
+
+        val image: Int = when (weatherCode) {
+            in Constants.CLEAR_RANGE -> {
+                R.drawable.forest_sunny
+            }
+            in Constants.CLOUDY_RANGE -> {
+                R.drawable.forest_cloudy
+            }
+            in Constants.RAINY_RANGE -> {
+                R.drawable.forest_rainy
+            }
+            else -> {
+                R.drawable.forest_sunny
+            }
+        }
+
+        binding.imageView.setImageResource(image)
+    }
+
+    private fun doubleToTemp(temp: Double): String {
         return "$temp"
     }
 }

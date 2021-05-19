@@ -34,6 +34,7 @@ class MainViewModel constructor(
     }
 
     fun getCurrentWeather(lat: Double, lon: Double) = viewModelScope.launch {
+        currentWeather.value = Resource.Loading()
         val response = weatherRepository.getCurrentWeather(lat, lon)
         val resource = handleCurrentWeatherResponse(response)
         currentWeather.postValue(resource)
@@ -43,6 +44,7 @@ class MainViewModel constructor(
     }
 
     fun getForecast(lat: Double, lon: Double) = viewModelScope.launch {
+        forecast.value = Resource.Loading()
         val response = weatherRepository.getForecast(lat, lon)
         forecast.postValue(handleForecastResponse(response))
     }
