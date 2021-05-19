@@ -53,7 +53,7 @@ class MainViewModel constructor(
         return themeRepository.getTheme()
     }
 
-    fun saveTheme(weatherCode: Int) {
+    private fun saveTheme(weatherCode: Int) {
         val initialTheme = getTheme()
 
         val theme: Int = when (weatherCode) {

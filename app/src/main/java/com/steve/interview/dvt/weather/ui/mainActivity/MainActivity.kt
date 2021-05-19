@@ -73,7 +73,9 @@ class MainActivity : AppCompatActivity() {
             is Resource.Error -> {
                 Toast.makeText(this, getString(R.string.forecast_error_text), LENGTH_SHORT).show()
             }
-            is Resource.Loading -> TODO()
+            is Resource.Loading -> {
+                Log.i(TAG, getString(R.string.loading))
+            }
         }
     }
 

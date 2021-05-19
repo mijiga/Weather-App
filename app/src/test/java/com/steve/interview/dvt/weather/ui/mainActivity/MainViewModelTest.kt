@@ -1,7 +1,6 @@
 package com.steve.interview.dvt.weather.ui.mainActivity
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.google.common.truth.Truth
 import com.google.common.truth.Truth.assertThat
 import com.steve.interview.dvt.weather.data.model.CurrentWeather
 import com.steve.interview.dvt.weather.data.model.ForecastResponse
