@@ -1,27 +1,30 @@
 package com.steve.interview.dvt.weather.ui.mainActivity
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.steve.interview.dvt.weather.data.model.CurrentWeather
 import com.steve.interview.dvt.weather.data.model.ForecastResponse
 import com.steve.interview.dvt.weather.data.repository.WeatherRepository
+import com.steve.interview.dvt.weather.data.repository.WeatherRepositoryInt
+import com.steve.interview.dvt.weather.util.Constants.Companion.DEFAULT_LAT
+import com.steve.interview.dvt.weather.util.Constants.Companion.DEFAULT_LON
 import com.steve.interview.dvt.weather.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import javax.inject.Inject
 
-@HiltViewModel
-class MainViewModel @Inject constructor(private val weatherRepository: WeatherRepository) :
+class MainViewModel constructor(private val weatherRepository: WeatherRepositoryInt) :
     ViewModel() {
 
     val currentWeather: MutableLiveData<Resource<CurrentWeather>> = MutableLiveData()
     val forecast: MutableLiveData<Resource<ForecastResponse>> = MutableLiveData()
 
     init {
-        this.getCurrentWeather(-13.9669,33.7873)
-        this.getForecast(-13.9669,33.7873)
+        this.getCurrentWeather(DEFAULT_LAT, DEFAULT_LON)
+        this.getForecast(DEFAULT_LAT, DEFAULT_LON)
     }
 
     fun getCurrentWeather(lat: Double, lon: Double) = viewModelScope.launch {
