@@ -14,6 +14,8 @@ class Constants {
         val CLOUDY_RANGE = 801..804
         val RAINY_RANGE = 500..504
 
+        const val REQUEST_CODE_LOCATION_PERMISSION = 100
+
 
 
     }

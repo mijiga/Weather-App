@@ -1,5 +1,6 @@
 package com.steve.interview.dvt.weather.ui.mainActivity
 
+import android.Manifest
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -16,17 +17,22 @@ import com.steve.interview.dvt.weather.data.repository.ThemeRepository
 import com.steve.interview.dvt.weather.data.repository.WeatherRepository
 import com.steve.interview.dvt.weather.databinding.ActivityMainBinding
 import com.steve.interview.dvt.weather.util.Constants
+import com.steve.interview.dvt.weather.util.Constants.Companion.REQUEST_CODE_LOCATION_PERMISSION
+import com.steve.interview.dvt.weather.util.PermissionUtility
 import com.steve.interview.dvt.weather.util.Resource
 import dagger.hilt.android.AndroidEntryPoint
+import pub.devrel.easypermissions.AppSettingsDialog
+import pub.devrel.easypermissions.EasyPermissions
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
 
     private val TAG = "MainActivity"
 
     @Inject
     lateinit var retrofit: WeatherAPI
+
     @Inject
     lateinit var sharedPreferences: SharedPreferences
 
@@ -36,8 +42,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val viewModel = MainViewModel(WeatherRepository(retrofit), ThemeRepository(sharedPreferences))
+        val viewModel =
+            MainViewModel(WeatherRepository(retrofit), ThemeRepository(sharedPreferences))
         setTheme(viewModel.getTheme())
+
+        requestPermissions()
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
@@ -55,15 +64,15 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.isDifferentTheme.observe(this, {
             //observes value change and if its true it recreates the activity in order to change the theme.
-            if(it){
+            if (it) {
                 recreate()
             }
         })
 
     }
 
-    private fun setupRecyclerView(resource: Resource<ForecastResponse>){
-        when(resource){
+    private fun setupRecyclerView(resource: Resource<ForecastResponse>) {
+        when (resource) {
             is Resource.Success -> {
                 resource.data?.let {
                     adapter.list = it.list
@@ -79,8 +88,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupViews(resource: Resource<CurrentWeather>){
-        when(resource){
+    private fun setupViews(resource: Resource<CurrentWeather>) {
+        when (resource) {
             is Resource.Success -> {
                 resource.data?.let {
                     binding.mainTemperature.text = doubleToTemp(it.main.temp)
@@ -103,7 +112,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupImage(weatherCode: Int){
+    private fun setupImage(weatherCode: Int) {
 
         val image: Int = when (weatherCode) {
             in Constants.CLEAR_RANGE -> {
@@ -123,7 +132,43 @@ class MainActivity : AppCompatActivity() {
         binding.imageView.setImageResource(image)
     }
 
+    private fun requestPermissions() {
+        if (PermissionUtility.hasLocationPermissions(this)) {
+            return
+        }
+
+        EasyPermissions.requestPermissions(
+            this,
+            "Please accept location permissions to use this app.",
+            REQUEST_CODE_LOCATION_PERMISSION,
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.ACCESS_FINE_LOCATION,
+        )
+
+    }
+
     private fun doubleToTemp(temp: Double): String {
         return "$temp"
+    }
+
+    override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {
+        
+    }
+
+    override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
+        if(EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
+            AppSettingsDialog.Builder(this).build().show()
+        } else {
+            requestPermissions()
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
     }
 }
