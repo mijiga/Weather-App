@@ -1,5 +1,4 @@
-# Weather App
- DVT Interview Solution
+# DVT Interview Solution
 
 Colors where generated using the material color tool(put link to it)
 using retrofit for REST API resolution
