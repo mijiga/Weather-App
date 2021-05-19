@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.steve.interview.dvt.weather.R
 import com.steve.interview.dvt.weather.data.model.CurrentWeather
 import com.steve.interview.dvt.weather.data.model.ForecastResponse
+import com.steve.interview.dvt.weather.data.repository.LocationRepository
 import com.steve.interview.dvt.weather.data.repository.ThemeRepository
 import com.steve.interview.dvt.weather.data.repository.WeatherRepositoryInt
 import com.steve.interview.dvt.weather.util.Constants
@@ -20,7 +21,8 @@ import retrofit2.Response
 
 class MainViewModel constructor(
     private val weatherRepository: WeatherRepositoryInt,
-    private val themeRepository: ThemeRepository
+    private val themeRepository: ThemeRepository,
+    private val locationRepository: LocationRepository
 ) :
     ViewModel() {
 
@@ -28,10 +30,10 @@ class MainViewModel constructor(
     val forecast: MutableLiveData<Resource<ForecastResponse>> = MutableLiveData()
     val isDifferentTheme: MutableLiveData<Boolean> = MutableLiveData()
 
-    init {
-        this.getCurrentWeather(DEFAULT_LAT, DEFAULT_LON)
-        this.getForecast(DEFAULT_LAT, DEFAULT_LON)
-    }
+//    init {
+//        this.getCurrentWeather(DEFAULT_LAT, DEFAULT_LON)
+//        this.getForecast(DEFAULT_LAT, DEFAULT_LON)
+//    }
 
     fun getCurrentWeather(lat: Double, lon: Double) = viewModelScope.launch {
         currentWeather.value = Resource.Loading()
@@ -47,6 +49,24 @@ class MainViewModel constructor(
         forecast.value = Resource.Loading()
         val response = weatherRepository.getForecast(lat, lon)
         forecast.postValue(handleForecastResponse(response))
+    }
+
+    private fun handleCurrentWeatherResponse(response: Response<CurrentWeather>): Resource<CurrentWeather> {
+        if (response.isSuccessful) {
+            response.body()?.let {
+                return Resource.Success(it)
+            }
+        }
+        return Resource.Error(response.message())
+    }
+
+    private fun handleForecastResponse(response: Response<ForecastResponse>): Resource<ForecastResponse> {
+        if (response.isSuccessful) {
+            response.body()?.let {
+                return Resource.Success(it)
+            }
+        }
+        return Resource.Error(response.message())
     }
 
     fun getTheme(): Int {
@@ -76,22 +96,9 @@ class MainViewModel constructor(
         themeRepository.setTheme(theme)
     }
 
-    private fun handleCurrentWeatherResponse(response: Response<CurrentWeather>): Resource<CurrentWeather> {
-        if (response.isSuccessful) {
-            response.body()?.let {
-                return Resource.Success(it)
-            }
-        }
-        return Resource.Error(response.message())
-    }
-
-    private fun handleForecastResponse(response: Response<ForecastResponse>): Resource<ForecastResponse> {
-        if (response.isSuccessful) {
-            response.body()?.let {
-                return Resource.Success(it)
-            }
-        }
-        return Resource.Error(response.message())
+    fun saveLocation(latitude: Double, longitude: Double) {
+        locationRepository.setLatitude(latitude)
+        locationRepository.setLongitude(longitude)
     }
 
 }

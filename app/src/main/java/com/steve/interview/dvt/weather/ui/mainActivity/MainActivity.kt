@@ -2,17 +2,21 @@ package com.steve.interview.dvt.weather.ui.mainActivity
 
 import android.Manifest
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
+import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.steve.interview.dvt.weather.R
 import com.steve.interview.dvt.weather.api.WeatherAPI
 import com.steve.interview.dvt.weather.data.model.CurrentWeather
 import com.steve.interview.dvt.weather.data.model.ForecastResponse
+import com.steve.interview.dvt.weather.data.repository.LocationRepository
 import com.steve.interview.dvt.weather.data.repository.ThemeRepository
 import com.steve.interview.dvt.weather.data.repository.WeatherRepository
 import com.steve.interview.dvt.weather.databinding.ActivityMainBinding
@@ -39,16 +43,26 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
     private lateinit var binding: ActivityMainBinding
     private lateinit var adapter: ForecastAdapter
 
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+    lateinit var viewModel: MainViewModel
+    lateinit var locationRepository: LocationRepository
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val viewModel =
-            MainViewModel(WeatherRepository(retrofit), ThemeRepository(sharedPreferences))
-        setTheme(viewModel.getTheme())
 
+        viewModel = MainViewModel(
+            WeatherRepository(retrofit),
+            ThemeRepository(sharedPreferences),
+            LocationRepository(sharedPreferences)
+        )
+        setTheme(viewModel.getTheme())
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         requestPermissions()
 
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        locationRepository = LocationRepository(sharedPreferences)
 
         adapter = ForecastAdapter()
         binding.forecastRecyclerView.layoutManager = LinearLayoutManager(this)
@@ -132,9 +146,30 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
         binding.imageView.setImageResource(image)
     }
 
+
+    private fun getLocation() {
+        fusedLocationClient.lastLocation
+            .addOnSuccessListener { location: Location? ->
+                if (location != null) {
+                    viewModel.getForecast(location.latitude, location.longitude)
+                    viewModel.getCurrentWeather(location.latitude, location.longitude)
+                    viewModel.saveLocation(location.latitude, location.longitude)
+                } else {
+                    viewModel.getForecast(
+                        locationRepository.getLatitude(),
+                        locationRepository.getLongitude()
+                    )
+                    viewModel.getCurrentWeather(
+                        locationRepository.getLatitude(),
+                        locationRepository.getLongitude()
+                    )
+                }
+            }
+    }
+
     private fun requestPermissions() {
         if (PermissionUtility.hasLocationPermissions(this)) {
-            return
+            getLocation()
         }
 
         EasyPermissions.requestPermissions(
@@ -152,11 +187,11 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
     }
 
     override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {
-        
+        getLocation()
     }
 
     override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
-        if(EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
+        if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
             AppSettingsDialog.Builder(this).build().show()
         } else {
             requestPermissions()
