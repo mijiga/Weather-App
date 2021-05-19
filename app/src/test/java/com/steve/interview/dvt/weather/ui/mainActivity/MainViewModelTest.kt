@@ -45,8 +45,8 @@ class MainViewModelTest {
 
     @Test
     fun `invalid weather code return false` () {
-        var value = viewModel.saveTheme()
-        assertThat()
+        //var value = viewModel.saveTheme()
+        //assertThat()
     }
 
     @Test

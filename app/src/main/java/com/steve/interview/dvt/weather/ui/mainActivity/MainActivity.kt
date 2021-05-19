@@ -35,9 +35,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val viewModel = MainViewModel(WeatherRepository(retrofit), ThemeRepository(sharedPreferences))
-        val prefs = getSharedPreferences(applicationContext.toString(), MODE_PRIVATE)
-
         setTheme(viewModel.getTheme())
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         adapter = ForecastAdapter()
@@ -53,15 +52,12 @@ class MainActivity : AppCompatActivity() {
             setupRecycler(it)
         })
 
-        binding.button.setOnClickListener {
-            prefs.edit().putInt("theme", R.style.Theme_Sunny).apply()
-            recreate()
-        }
-
-        binding.button2.setOnClickListener {
-            prefs.edit().putInt("theme", R.style.Theme_Cloudy).apply()
-            recreate()
-        }
+        viewModel.isDifferentTheme.observe(this, {
+            //observes value change and if its true it recreates the activity in order to change the theme.
+            if(it){
+                recreate()
+            }
+        })
 
     }
 
@@ -74,7 +70,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             is Resource.Error -> {
-                Toast.makeText(this, "Couldn't get forecast", LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.forecast_error_text), LENGTH_SHORT).show()
             }
             is Resource.Loading -> TODO()
         }
@@ -92,12 +88,14 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             is Resource.Error -> {
-                Toast.makeText(this, "Couldn't get Current Weather", LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.weather_error_text), LENGTH_SHORT).show()
                 resource.message?.let {
                     Log.e(TAG, it)
                 }
             }
-            is Resource.Loading -> TODO()
+            is Resource.Loading -> {
+                binding.currentState.text = getString(R.string.loading)
+            }
         }
     }
 

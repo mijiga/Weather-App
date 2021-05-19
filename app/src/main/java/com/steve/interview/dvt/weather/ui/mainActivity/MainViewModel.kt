@@ -26,6 +26,7 @@ class MainViewModel constructor(
 
     val currentWeather: MutableLiveData<Resource<CurrentWeather>> = MutableLiveData()
     val forecast: MutableLiveData<Resource<ForecastResponse>> = MutableLiveData()
+    val isDifferentTheme: MutableLiveData<Boolean> = MutableLiveData()
 
     init {
         this.getCurrentWeather(DEFAULT_LAT, DEFAULT_LON)
@@ -34,7 +35,11 @@ class MainViewModel constructor(
 
     fun getCurrentWeather(lat: Double, lon: Double) = viewModelScope.launch {
         val response = weatherRepository.getCurrentWeather(lat, lon)
-        currentWeather.postValue(handleCurrentWeatherResponse(response))
+        val resource = handleCurrentWeatherResponse(response)
+        currentWeather.postValue(resource)
+        resource.data?.let {
+            saveTheme(it.weather[0].id)
+        }
     }
 
     fun getForecast(lat: Double, lon: Double) = viewModelScope.launch {
@@ -47,20 +52,26 @@ class MainViewModel constructor(
     }
 
     fun saveTheme(weatherCode: Int) {
-        when (weatherCode) {
+        val initialTheme = getTheme()
+
+        val theme: Int = when (weatherCode) {
             in CLEAR_RANGE -> {
-                themeRepository.setTheme(R.style.Theme_Sunny)
+                R.style.Theme_Sunny
             }
             in CLOUDY_RANGE -> {
-                themeRepository.setTheme(R.style.Theme_Cloudy)
+                R.style.Theme_Cloudy
             }
             in RAINY_RANGE -> {
-                themeRepository.setTheme(R.style.Theme_Rainy)
+                R.style.Theme_Rainy
             }
             else -> {
-                themeRepository.setTheme(R.style.Theme_Sunny)
+                R.style.Theme_Sunny
             }
         }
+
+        isDifferentTheme.value = initialTheme != theme
+
+        themeRepository.setTheme(theme)
     }
 
     private fun handleCurrentWeatherResponse(response: Response<CurrentWeather>): Resource<CurrentWeather> {

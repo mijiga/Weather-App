@@ -5,4 +5,7 @@
     <string name="max">max</string>
     <string name="menu_button">Menu Button</string>
     <string name="error_message">Something went wrong</string>
+    <string name="loading">Loading...</string>
+    <string name="weather_error_text">Couldn\'t get Current Weather</string>
+    <string name="forecast_error_text">Couldn\'t get forecast</string>
 </resources>
