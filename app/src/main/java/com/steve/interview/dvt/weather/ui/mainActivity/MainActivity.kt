@@ -22,6 +22,8 @@ import com.steve.interview.dvt.weather.data.repository.WeatherRepository
 import com.steve.interview.dvt.weather.databinding.ActivityMainBinding
 import com.steve.interview.dvt.weather.util.Constants
 import com.steve.interview.dvt.weather.util.Constants.Companion.REQUEST_CODE_LOCATION_PERMISSION
+import com.steve.interview.dvt.weather.util.FormattingUtil
+import com.steve.interview.dvt.weather.util.FormattingUtil.doubleToTemp
 import com.steve.interview.dvt.weather.util.PermissionUtility
 import com.steve.interview.dvt.weather.util.Resource
 import dagger.hilt.android.AndroidEntryPoint
@@ -163,6 +165,7 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
                         locationRepository.getLatitude(),
                         locationRepository.getLongitude()
                     )
+
                 }
             }
     }
@@ -180,10 +183,6 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
             Manifest.permission.ACCESS_FINE_LOCATION,
         )
 
-    }
-
-    private fun doubleToTemp(temp: Double): String {
-        return "$temp"
     }
 
     override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {
