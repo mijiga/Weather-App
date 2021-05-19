@@ -18,6 +18,9 @@ Interview Solution App using [Android Architecture Components](https://developer
 * Tests
     * [Unit Tests](https://en.wikipedia.org/wiki/Unit_testing) ([JUnit](https://junit.org/junit4/)) - a simple framework to write repeatable tests.
 
+
+## UI and Unit Tests
+
 ## Theme & Design
   * Theme colors generated using the [Material Color Tool](https://material.io/resources/color/)
 
