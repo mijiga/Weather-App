@@ -25,5 +25,5 @@ Interview Solution App using [Android Architecture Components](https://developer
   * Theme colors generated using the [Material Color Tool](https://material.io/resources/color/)
 
 ## Issues
-  * The [Forecast endpoint](https://openweathermap.org/forecast5) serves data for every 3 hours and not single day(premium feature) as suggested in the design
+  * The [Forecast endpoint](https://openweathermap.org/forecast5) serves data for every 3 hours and not single day(premium feature) as suggested in the provided design
 
