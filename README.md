@@ -17,7 +17,7 @@ Interview Solution App using [Android Architecture Components](https://developer
     * MVVM - Model View View Model
 * Tests
     * [Unit Tests](https://en.wikipedia.org/wiki/Unit_testing) ([JUnit](https://junit.org/junit4/)) - a simple framework to write repeatable tests.
-
+    * [UI Tests]() ([Espresso](https://developer.android.com/training/testing/espresso)) - concise and reliable Android UI tests.
 
 ## UI and Unit Tests
 
