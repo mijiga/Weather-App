@@ -22,7 +22,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
-
     @Singleton
     @Provides
     fun providesRetrofit(@ApplicationContext context: Context): WeatherAPI {

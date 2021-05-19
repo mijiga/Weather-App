@@ -9,7 +9,7 @@ import retrofit2.http.Query
 
 interface WeatherAPI {
 
-    @GET("weather/daily?")
+    @GET("weather?")
     suspend fun getCurrentWeather(
         @Query("lat") lat: Double,
         @Query("lon") lon: Double,
@@ -21,7 +21,6 @@ interface WeatherAPI {
     suspend fun getForecast(
         @Query("lat") lat: Double,
         @Query("lon") lon: Double,
-        @Query("cnt") cnt: Int = 5,
         @Query("units") units: String = "metric",
         @Query("appid") appid: String = API_KEY
     ): Response<ForecastResponse>

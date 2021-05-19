@@ -83,7 +83,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun doubleToTemp(temp: Double): String {//TODO: This doesn't belong in this class
+    private fun doubleToTemp(temp: Double): String {//TODO: This doesn't belong in this class - maybe a extension function to the Double class?
         return "$temp"
     }
 }
