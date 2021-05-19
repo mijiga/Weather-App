@@ -1,5 +1,6 @@
 package com.steve.interview.dvt.weather.ui.mainActivity
 
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -11,6 +12,7 @@ import com.steve.interview.dvt.weather.R
 import com.steve.interview.dvt.weather.api.WeatherAPI
 import com.steve.interview.dvt.weather.data.model.CurrentWeather
 import com.steve.interview.dvt.weather.data.model.ForecastResponse
+import com.steve.interview.dvt.weather.data.repository.ThemeRepository
 import com.steve.interview.dvt.weather.data.repository.WeatherRepository
 import com.steve.interview.dvt.weather.databinding.ActivityMainBinding
 import com.steve.interview.dvt.weather.util.Resource
@@ -24,19 +26,25 @@ class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var retrofit: WeatherAPI
+    @Inject
+    lateinit var sharedPreferences: SharedPreferences
     private lateinit var binding: ActivityMainBinding
-    private lateinit var adapter: ForecastAdapter //TODO: revisit having this as a global val
+    private lateinit var adapter: ForecastAdapter
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //TODO: The image is being cropped at the bottom
+        val viewModel = MainViewModel(WeatherRepository(retrofit), ThemeRepository(sharedPreferences))
+        val prefs = getSharedPreferences(applicationContext.toString(), MODE_PRIVATE)
+
+        setTheme(viewModel.getTheme())
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         adapter = ForecastAdapter()
         binding.forecastRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.forecastRecyclerView.adapter = adapter
 
-        val viewModel = MainViewModel(WeatherRepository(retrofit))
+
         viewModel.currentWeather.observe(this, {
             setupViews(it)
         })
@@ -44,6 +52,16 @@ class MainActivity : AppCompatActivity() {
         viewModel.forecast.observe(this, {
             setupRecycler(it)
         })
+
+        binding.button.setOnClickListener {
+            prefs.edit().putInt("theme", R.style.Theme_Sunny).apply()
+            recreate()
+        }
+
+        binding.button2.setOnClickListener {
+            prefs.edit().putInt("theme", R.style.Theme_Cloudy).apply()
+            recreate()
+        }
 
     }
 

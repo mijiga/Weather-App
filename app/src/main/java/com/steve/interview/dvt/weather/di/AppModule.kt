@@ -1,6 +1,8 @@
 package com.steve.interview.dvt.weather.di
 
 import android.content.Context
+import android.content.SharedPreferences
+import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.GsonBuilder
 import com.steve.interview.dvt.weather.api.WeatherAPI
 import com.steve.interview.dvt.weather.util.Constants.Companion.BASE_URL
@@ -22,7 +24,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
-
     @Singleton
     @Provides
     fun providesRetrofit(@ApplicationContext context: Context): WeatherAPI {
@@ -40,6 +41,12 @@ object AppModule {
             .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
             .build()
         return retrofit.create(WeatherAPI::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun providesSharePreferences(@ApplicationContext context: Context): SharedPreferences {
+        return context.getSharedPreferences(context.applicationContext.toString(), AppCompatActivity.MODE_PRIVATE)
     }
 
 

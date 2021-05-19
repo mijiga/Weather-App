@@ -10,6 +10,12 @@ class Constants {
         const val DEFAULT_LAT = -13.9669
         const val DEFAULT_LON = 33.7873
 
+        val CLEAR_RANGE = 800..800
+        val CLOUDY_RANGE = 801..804
+        val RAINY_RANGE = 500..504
+
+
+
     }
 
 }
