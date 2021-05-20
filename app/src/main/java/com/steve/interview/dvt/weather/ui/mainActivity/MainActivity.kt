@@ -16,13 +16,12 @@ import com.steve.interview.dvt.weather.R
 import com.steve.interview.dvt.weather.api.WeatherAPI
 import com.steve.interview.dvt.weather.data.model.CurrentWeather
 import com.steve.interview.dvt.weather.data.model.ForecastResponse
-import com.steve.interview.dvt.weather.data.repository.LocationRepository
-import com.steve.interview.dvt.weather.data.repository.ThemeRepository
+import com.steve.interview.dvt.weather.data.repository.DefaultLocationRepository
+import com.steve.interview.dvt.weather.data.repository.DefaultThemeRepository
 import com.steve.interview.dvt.weather.data.repository.WeatherRepository
 import com.steve.interview.dvt.weather.databinding.ActivityMainBinding
 import com.steve.interview.dvt.weather.util.Constants
 import com.steve.interview.dvt.weather.util.Constants.Companion.REQUEST_CODE_LOCATION_PERMISSION
-import com.steve.interview.dvt.weather.util.FormattingUtil
 import com.steve.interview.dvt.weather.util.FormattingUtil.doubleToTemp
 import com.steve.interview.dvt.weather.util.PermissionUtility
 import com.steve.interview.dvt.weather.util.Resource
@@ -47,7 +46,7 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     lateinit var viewModel: MainViewModel
-    lateinit var locationRepository: LocationRepository
+    lateinit var defaultLocationRepository: DefaultLocationRepository
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,8 +54,8 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
 
         viewModel = MainViewModel(
             WeatherRepository(retrofit),
-            ThemeRepository(sharedPreferences),
-            LocationRepository(sharedPreferences)
+            DefaultThemeRepository(sharedPreferences),
+            DefaultLocationRepository(sharedPreferences)
         )
         setTheme(viewModel.getTheme())
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
@@ -64,7 +63,7 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         requestPermissions()
 
-        locationRepository = LocationRepository(sharedPreferences)
+        defaultLocationRepository = DefaultLocationRepository(sharedPreferences)
 
         adapter = ForecastAdapter()
         binding.forecastRecyclerView.layoutManager = LinearLayoutManager(this)
@@ -158,12 +157,12 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
                     viewModel.saveLocation(location.latitude, location.longitude)
                 } else {
                     viewModel.getForecast(
-                        locationRepository.getLatitude(),
-                        locationRepository.getLongitude()
+                        defaultLocationRepository.getLatitude(),
+                        defaultLocationRepository.getLongitude()
                     )
                     viewModel.getCurrentWeather(
-                        locationRepository.getLatitude(),
-                        locationRepository.getLongitude()
+                        defaultLocationRepository.getLatitude(),
+                        defaultLocationRepository.getLongitude()
                     )
 
                 }

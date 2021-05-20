@@ -4,6 +4,8 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.google.common.truth.Truth.assertThat
 import com.steve.interview.dvt.weather.data.model.CurrentWeather
 import com.steve.interview.dvt.weather.data.model.ForecastResponse
+import com.steve.interview.dvt.weather.data.repository.FakeLocationRepository
+import com.steve.interview.dvt.weather.data.repository.FakeThemeRepository
 import com.steve.interview.dvt.weather.data.repository.FakeWeatherRepository
 import com.steve.interview.dvt.weather.util.Constants.Companion.DEFAULT_LAT
 import com.steve.interview.dvt.weather.util.Constants.Companion.DEFAULT_LON
@@ -21,7 +23,7 @@ class MainViewModelTest {
 
     @Before
     fun setup() {
-        viewModel = MainViewModel(FakeWeatherRepository())
+        viewModel = MainViewModel(FakeWeatherRepository(), FakeThemeRepository(), FakeLocationRepository())
     }
 
     @Test
