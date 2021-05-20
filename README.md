@@ -1,6 +1,15 @@
 # DVT Interview Solution
 Interview Solution App using [Android Architecture Components](https://developer.android.com/topic/libraries/architecture/), in 100% Kotlin
 
+## Background
+Create a weather application to display the current weather at the user’s location and a 5-day forecast.
+
+1) You are required to implement one of 2 designs, the Forest design or the Sea design (see iOS Screen Designs or Android Screen Designs folders). You can choose either one.
+2) The forecast must be based on the user’s current location.
+3) The application should connect to the following API to collect the weather information. 
+      * https://openweathermap.org/current 
+      * https://openweathermap.org/forecast5
+5) You will be required to change the background image depending on the type of weather (Cloudy, Sunny and Rainy). Please use the provided assets and icons.
 
 ## Tech-stack
 
@@ -17,9 +26,16 @@ Interview Solution App using [Android Architecture Components](https://developer
     * MVVM - Model View View Model
 * Tests
     * [Unit Tests](https://en.wikipedia.org/wiki/Unit_testing) ([JUnit](https://junit.org/junit4/)) - a simple framework to write repeatable tests.
-    * [UI Tests]() ([Espresso](https://developer.android.com/training/testing/espresso)) - concise and reliable Android UI tests.
+    * [UI Tests]() ([Espresso](https://developer.android.com/training/testing/espresso)) - concise and reliable Android UI testing framework.
 
 ## UI and Unit Tests
+#### Unit Tests on Presentation Layer
+
+The Unit Tests here test ViewModel
+
+<img src="https://github.com/mijiga/Weather-App/blob/main/screenshots/weather_presentation_unit_test.PNG">
+
+More tests can be added
 
 ## Theme & Design
   * Theme colors generated using the [Material Color Tool](https://material.io/resources/color/)
