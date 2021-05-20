@@ -24,6 +24,10 @@ Interview Solution App using [Android Architecture Components](https://developer
 
 The Unit Tests here test ViewModel
 
+<img src="https://github.com/mijiga/Weather-App/blob/main/screenshots/weather_presentation_unit_test.PNG">
+
+More tests can be added
+
 ## Theme & Design
   * Theme colors generated using the [Material Color Tool](https://material.io/resources/color/)
 
