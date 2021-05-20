@@ -20,6 +20,9 @@ Interview Solution App using [Android Architecture Components](https://developer
     * [UI Tests]() ([Espresso](https://developer.android.com/training/testing/espresso)) - concise and reliable Android UI tests.
 
 ## UI and Unit Tests
+#### Unit Tests on Presentation Layer
+
+The Unit Tests here test ViewModel
 
 ## Theme & Design
   * Theme colors generated using the [Material Color Tool](https://material.io/resources/color/)
