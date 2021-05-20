@@ -1,13 +1,15 @@
 package com.steve.interview.dvt.weather.data.repository
 
+import com.steve.interview.dvt.weather.data.sample.testTheme
+
 class FakeThemeRepository: ThemeRepository {
 
     override fun getTheme(): Int {
-        TODO("Not yet implemented")
+        return testTheme
     }
 
     override fun setTheme(theme: Int) {
-        TODO("Not yet implemented")
+        testTheme = theme
     }
 
 }

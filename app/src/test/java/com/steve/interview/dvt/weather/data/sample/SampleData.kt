@@ -1,11 +1,17 @@
 package com.steve.interview.dvt.weather.data.sample
 
 import com.google.gson.Gson
+import com.steve.interview.dvt.weather.R
 import com.steve.interview.dvt.weather.data.model.CurrentWeather
 import com.steve.interview.dvt.weather.data.model.ForecastResponse
 
 
 private val gson = Gson()
+
+var testTheme = 0
+
+var testWeatherCode = 800
+var testStyle = R.style.Theme_Sunny
 
 val weatherString = "{\n" +
         "    \"coord\": {\n" +
