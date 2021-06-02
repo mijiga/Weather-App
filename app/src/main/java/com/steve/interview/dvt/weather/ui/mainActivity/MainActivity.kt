@@ -1,6 +1,7 @@
 package com.steve.interview.dvt.weather.ui.mainActivity
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.SharedPreferences
 import android.location.Location
 import android.os.Bundle
@@ -148,6 +149,7 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
     }
 
 
+    @SuppressLint("MissingPermission")
     private fun getLocation() {
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location: Location? ->

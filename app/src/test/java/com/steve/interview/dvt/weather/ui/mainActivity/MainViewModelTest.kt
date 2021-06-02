@@ -45,7 +45,6 @@ class MainViewModelTest {
         assertThat(value?.data).isInstanceOf(ForecastResponse::class.java)
     }
 
-
     @Test
     fun `test saving theme` () {
         viewModel.saveTheme(testWeatherCode)
