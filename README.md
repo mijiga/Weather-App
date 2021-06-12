@@ -13,7 +13,7 @@ Create a weather application to display the current weather at the user’s loca
 
 ## Tech-stack
 
-* Tech-stack
+* Libraries
     * [Kotlin](https://kotlinlang.org/) - a cross-platform, statically typed, general-purpose programming language with type inference.
     * [Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html) - perform background operations.
     * [Dagger-Hilt](https://dagger.dev/hilt/) - a standard way to incorporate Dagger dependency injection into an Android application
