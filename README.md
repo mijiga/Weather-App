@@ -22,6 +22,7 @@ Create a weather application to display the current weather at the user’s loca
         * [LiveData](https://developer.android.com/topic/libraries/architecture/livedata) - is an observable data holder.
         * [Lifecycle](https://developer.android.com/topic/libraries/architecture/lifecycle) - perform action when lifecycle state changes.
         * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) - store and manage UI-related data in a lifecycle conscious way.
+   * [Easy Permisisons](https://github.com/googlesamples/easypermissions) - a wrapper library to simplify basic system permissions logic.
 * Architecture
     * MVVM - Model View View Model
 * Tests
