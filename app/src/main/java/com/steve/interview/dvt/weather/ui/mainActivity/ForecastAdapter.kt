@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.steve.interview.dvt.weather.R
 import com.steve.interview.dvt.weather.data.model.CurrentWeather
 import com.steve.interview.dvt.weather.util.Constants
-import com.steve.interview.dvt.weather.util.FormattingUtil.doubleToTemp
+import com.steve.interview.dvt.weather.util.toTemperature
 import kotlin.collections.ArrayList
 
 class ForecastAdapter : RecyclerView.Adapter<ForecastAdapter.ViewHolder>() {
@@ -28,8 +28,7 @@ class ForecastAdapter : RecyclerView.Adapter<ForecastAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val forecastItem = list[position]
-
-        holder.tempView.text = doubleToTemp(forecastItem.main.temp)
+        holder.tempView.text = forecastItem.main.temp.toTemperature()
         holder.dayView.text = forecastItem.weather[0].main
 
         holder.iconView.setImageResource(getIcon(forecastItem.weather[0].id))
@@ -63,3 +62,4 @@ class ForecastAdapter : RecyclerView.Adapter<ForecastAdapter.ViewHolder>() {
         }
     }
 }
+

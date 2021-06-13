@@ -2,7 +2,6 @@ package com.steve.interview.dvt.weather.ui.mainActivity
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.google.common.truth.Truth.assertThat
-import com.steve.interview.dvt.weather.R
 import com.steve.interview.dvt.weather.data.model.CurrentWeather
 import com.steve.interview.dvt.weather.data.model.ForecastResponse
 import com.steve.interview.dvt.weather.data.repository.FakeLocationRepository
@@ -16,7 +15,6 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
-
 class MainViewModelTest {
 
     @get:Rule
@@ -26,7 +24,7 @@ class MainViewModelTest {
 
     @Before
     fun setup() {
-        
+
         viewModel = MainViewModel(FakeWeatherRepository(), FakeThemeRepository(), FakeLocationRepository())
     }
 
@@ -47,13 +45,9 @@ class MainViewModelTest {
     }
 
     @Test
-    fun `test saving theme` () {
+    fun `test saving theme`() {
         viewModel.saveTheme(testWeatherCode)
 
         assertThat(viewModel.getTheme()).isEqualTo(testTheme)
     }
-
-
-
-
 }

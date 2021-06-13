@@ -23,9 +23,9 @@ import com.steve.interview.dvt.weather.data.repository.WeatherRepository
 import com.steve.interview.dvt.weather.databinding.ActivityMainBinding
 import com.steve.interview.dvt.weather.util.Constants
 import com.steve.interview.dvt.weather.util.Constants.Companion.REQUEST_CODE_LOCATION_PERMISSION
-import com.steve.interview.dvt.weather.util.FormattingUtil.doubleToTemp
 import com.steve.interview.dvt.weather.util.PermissionUtility
 import com.steve.interview.dvt.weather.util.Resource
+import com.steve.interview.dvt.weather.util.toTemperature
 import dagger.hilt.android.AndroidEntryPoint
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
@@ -115,10 +115,10 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
         when (resource) {
             is Resource.Success -> {
                 resource.data?.let {
-                    binding.mainTemperature.text = doubleToTemp(it.main.temp)
-                    binding.currentTemperature.text = doubleToTemp(it.main.temp)
-                    binding.minTemperature.text = doubleToTemp(it.main.temp_min)
-                    binding.maxTemperature.text = doubleToTemp(it.main.temp_max)
+                    binding.mainTemperature.text = it.main.temp.toTemperature()
+                    binding.currentTemperature.text = it.main.temp.toTemperature()
+                    binding.minTemperature.text = it.main.temp_min.toTemperature()
+                    binding.maxTemperature.text = it.main.temp_max.toTemperature()
                     binding.currentState.text = it.weather[0].main
                     setupImage(it.weather[0].id)
                 }

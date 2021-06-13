@@ -83,7 +83,7 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v2
-        
+
       - name: Change wrapper permissions
         run: chmod +x ./gradlew
 
