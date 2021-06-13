@@ -11,12 +11,9 @@ on:
   workflow_dispatch:
 
 jobs:
-<<<<<<< Updated upstream
   build:
 
-=======
   test_job:
->>>>>>> Stashed changes
     runs-on: ubuntu-latest
 
     steps:
@@ -30,11 +27,7 @@ jobs:
 
       - name: Change wrapper permissions
         run: chmod +x ./gradlew
-
-<<<<<<< Updated upstream
-      - name: Build Project
-        run: ./gradlew assemble
-=======
+        
       - name: Restore Cache
         uses: actions/cache@v2
         with:
@@ -108,4 +101,3 @@ jobs:
       - name: Assemble Debug
         run: ./gradlew assembleDebug
 
->>>>>>> Stashed changes
