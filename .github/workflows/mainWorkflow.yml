@@ -1,6 +1,5 @@
+
 name: Weather Default Workflow
-
-
 on:
   push:
     branches: [ main ]
@@ -12,9 +11,7 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
