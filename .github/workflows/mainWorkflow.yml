@@ -28,24 +28,24 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: Restore Cache
-          uses: actions/cache@v2
-          with:
-            path: |
-              ~/.gradle/caches
-              ~/.gradle/wrapper
-            key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
-            restore-keys: |
-              ${{ runner.os }}-gradle-
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
 
       - name: Run Debug Tests
         run: ./gradlew testDebugUnitTest --continue
 
       - name: Upload Test Reports
-          if: ${{ always() }}
-          uses: actions/upload-artifact@v2
-          with:
-            name: test-reports
-            path: '**/build/reports/tests/'
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-reports
+          path: '**/build/reports/tests/'
             
       - name: Build Project
         run: ./gradlew assemble
