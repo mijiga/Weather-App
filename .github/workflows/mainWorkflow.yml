@@ -10,8 +10,6 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
-
   test_job:
     runs-on: ubuntu-latest
     steps:
@@ -45,7 +43,6 @@ jobs:
         with:
           name: test-reports
           path: '**/build/reports/tests/'
-
 
   lint_job:
     name: Lint
