@@ -183,7 +183,7 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
 
         EasyPermissions.requestPermissions(
             this,
-            "Please accept location permissions to use this app.",
+            getString(R.string.location_permission_rationale),
             REQUEST_CODE_LOCATION_PERMISSION,
             Manifest.permission.ACCESS_COARSE_LOCATION,
             Manifest.permission.ACCESS_FINE_LOCATION,
