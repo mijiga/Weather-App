@@ -1,5 +1,5 @@
-# DVT Interview Solution
-Interview Solution App using [Android Architecture Components](https://developer.android.com/topic/libraries/architecture/), in 100% Kotlin
+# Weather App
+An Android app consuming the [Open Weather Map API](https://openweathermap.org/) to provide the day's weather and a 5 day forecast. It has been built on the MVVM pattern with clean architecture principles and Architecture Components.
 
 ## Background
 Create a weather application to display the current weather at the user’s location and a 5-day forecast.
