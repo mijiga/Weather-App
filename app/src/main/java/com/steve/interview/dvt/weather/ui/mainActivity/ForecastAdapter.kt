@@ -15,7 +15,7 @@ import kotlin.collections.ArrayList
 
 class ForecastAdapter : RecyclerView.Adapter<ForecastAdapter.ViewHolder>() {
 
-    private lateinit var context:Context
+    private lateinit var context: Context
     var list: List<CurrentWeather> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -33,14 +33,12 @@ class ForecastAdapter : RecyclerView.Adapter<ForecastAdapter.ViewHolder>() {
         holder.dayView.text = forecastItem.weather[0].main
 
         holder.iconView.setImageResource(getIcon(forecastItem.weather[0].id))
-
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var dayView: TextView = itemView.findViewById(R.id.day)
         var tempView: TextView = itemView.findViewById(R.id.temp)
         var iconView: ImageView = itemView.findViewById(R.id.imageView3)
-
     }
 
     override fun getItemCount(): Int {
@@ -64,5 +62,4 @@ class ForecastAdapter : RecyclerView.Adapter<ForecastAdapter.ViewHolder>() {
             }
         }
     }
-
 }

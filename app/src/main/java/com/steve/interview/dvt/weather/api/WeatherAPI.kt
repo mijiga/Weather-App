@@ -24,5 +24,4 @@ interface WeatherAPI {
         @Query("units") units: String = "metric",
         @Query("appid") appid: String = API_KEY
     ): Response<ForecastResponse>
-
 }

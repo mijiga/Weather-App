@@ -27,7 +27,6 @@ class MainViewModel constructor(
     val forecast: MutableLiveData<Resource<ForecastResponse>> = MutableLiveData()
     val isDifferentTheme: MutableLiveData<Boolean> = MutableLiveData()
 
-
     fun getCurrentWeather(lat: Double, lon: Double) = viewModelScope.launch {
         currentWeather.value = Resource.Loading()
         val response = weatherRepository.getCurrentWeather(lat, lon)
@@ -93,5 +92,4 @@ class MainViewModel constructor(
         defaultLocationRepository.setLatitude(latitude)
         defaultLocationRepository.setLongitude(longitude)
     }
-
 }

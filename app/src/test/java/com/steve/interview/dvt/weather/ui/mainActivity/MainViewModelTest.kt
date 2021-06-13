@@ -26,6 +26,7 @@ class MainViewModelTest {
 
     @Before
     fun setup() {
+        
         viewModel = MainViewModel(FakeWeatherRepository(), FakeThemeRepository(), FakeLocationRepository())
     }
 

@@ -1,15 +1,7 @@
 # Weather App
-An Android app consuming the [Open Weather Map API](https://openweathermap.org/) to provide the day's weather and a 5 day forecast. It has been built on the MVVM pattern with clean architecture principles and Architecture Components.
+An Android app consuming the [Open Weather Map API](https://openweathermap.org/), built on the MVVM pattern with clean architecture principles and Architecture Components.
 
-## Background
-Create a weather application to display the current weather at the user’s location and a 5-day forecast.
-
-1) You are required to implement one of 2 designs, the Forest design or the Sea design (see iOS Screen Designs or Android Screen Designs folders). You can choose either one.
-2) The forecast must be based on the user’s current location.
-3) The application should connect to the following API to collect the weather information. 
-      * https://openweathermap.org/current 
-      * https://openweathermap.org/forecast5
-5) You will be required to change the background image depending on the type of weather (Cloudy, Sunny and Rainy). Please use the provided assets and icons.
+Based on the user's location, the app displays the current day's forecast as well as that of the upcoming 5 days. The app's theme changes based on the current weather type(cloudy, rainy, sunny).
 
 ## Tech-stack
 
@@ -24,7 +16,7 @@ Create a weather application to display the current weather at the user’s loca
         * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) - store and manage UI-related data in a lifecycle conscious way.
    * [Easy Permisisons](https://github.com/googlesamples/easypermissions) - a wrapper library to simplify basic system permissions logic.
 * Architecture
-    * MVVM - Model View View Model
+    * MVVM - Model View ViewModel
 * Tests
     * [Unit Tests](https://en.wikipedia.org/wiki/Unit_testing) ([JUnit](https://junit.org/junit4/)) - a simple framework to write repeatable tests.
     * [UI Tests]() ([Espresso](https://developer.android.com/training/testing/espresso)) - concise and reliable Android UI testing framework.

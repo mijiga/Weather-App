@@ -48,6 +48,4 @@ object AppModule {
     fun providesSharePreferences(@ApplicationContext context: Context): SharedPreferences {
         return context.getSharedPreferences(context.applicationContext.toString(), AppCompatActivity.MODE_PRIVATE)
     }
-
-
 }
