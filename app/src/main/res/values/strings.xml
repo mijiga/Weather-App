@@ -8,4 +8,5 @@
     <string name="loading">Loading…</string>
     <string name="weather_error_text">Couldn\'t get Current Weather</string>
     <string name="forecast_error_text">Couldn\'t get forecast</string>
+    <string name="location_permission_rationale">Please accept location permissions to use this app.</string>
 </resources>
