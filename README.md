@@ -16,7 +16,7 @@ Based on the user's location, the app displays the current day's forecast as wel
         * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) - store and manage UI-related data in a lifecycle conscious way.
    * [Easy Permisisons](https://github.com/googlesamples/easypermissions) - a wrapper library to simplify basic system permissions logic.
 * Architecture
-    * MVVM - Model View View Model
+    * MVVM - Model View ViewModel
 * Tests
     * [Unit Tests](https://en.wikipedia.org/wiki/Unit_testing) ([JUnit](https://junit.org/junit4/)) - a simple framework to write repeatable tests.
     * [UI Tests]() ([Espresso](https://developer.android.com/training/testing/espresso)) - concise and reliable Android UI testing framework.
