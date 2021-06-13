@@ -15,9 +15,5 @@ class Constants {
         val RAINY_RANGE = 500..504
 
         const val REQUEST_CODE_LOCATION_PERMISSION = 100
-
-
-
     }
-
 }

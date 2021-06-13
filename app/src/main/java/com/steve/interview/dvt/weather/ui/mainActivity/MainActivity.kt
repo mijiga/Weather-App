@@ -49,7 +49,6 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
     lateinit var viewModel: MainViewModel
     lateinit var defaultLocationRepository: DefaultLocationRepository
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -70,21 +69,29 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
         binding.forecastRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.forecastRecyclerView.adapter = adapter
 
-        viewModel.currentWeather.observe(this, {
-            setupViews(it)
-        })
-
-        viewModel.forecast.observe(this, {
-            setupRecyclerView(it)
-        })
-
-        viewModel.isDifferentTheme.observe(this, {
-            //observes value change and if its true it recreates the activity in order to change the theme.
-            if (it) {
-                recreate()
+        viewModel.currentWeather.observe(
+            this,
+            {
+                setupViews(it)
             }
-        })
+        )
 
+        viewModel.forecast.observe(
+            this,
+            {
+                setupRecyclerView(it)
+            }
+        )
+
+        viewModel.isDifferentTheme.observe(
+            this,
+            {
+                // observes value change and if its true it recreates the activity in order to change the theme.
+                if (it) {
+                    recreate()
+                }
+            }
+        )
     }
 
     private fun setupRecyclerView(resource: Resource<ForecastResponse>) {
@@ -148,7 +155,6 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
         binding.imageView.setImageResource(image)
     }
 
-
     @SuppressLint("MissingPermission")
     private fun getLocation() {
         fusedLocationClient.lastLocation
@@ -166,7 +172,6 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
                         defaultLocationRepository.getLatitude(),
                         defaultLocationRepository.getLongitude()
                     )
-
                 }
             }
     }
@@ -183,7 +188,6 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
             Manifest.permission.ACCESS_COARSE_LOCATION,
             Manifest.permission.ACCESS_FINE_LOCATION,
         )
-
     }
 
     override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {

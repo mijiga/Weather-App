@@ -5,5 +5,4 @@ object FormattingUtil {
     fun doubleToTemp(temp: Double): String {
         return "$temp\u00B0"
     }
-
 }

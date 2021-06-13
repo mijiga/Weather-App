@@ -9,5 +9,4 @@ class WeatherRepository @Inject constructor(private val api: WeatherAPI) : Weath
         api.getCurrentWeather(lat, lon)
 
     override suspend fun getForecast(lat: Double, lon: Double) = api.getForecast(lat, lon)
-
 }
