@@ -1,4 +1,5 @@
-# Weather App
+# Weather App   
+[![Weather Default Workflow](https://github.com/mijiga/Weather-App/actions/workflows/mainWorkflow.yml/badge.svg)](https://github.com/mijiga/Weather-App/actions/workflows/mainWorkflow.yml)
 An Android app consuming the [Open Weather Map API](https://openweathermap.org/), built on the MVVM pattern with clean architecture principles and Architecture Components.
 
 Based on the user's location, the app displays the current day's forecast as well as that of the upcoming 5 days. The app's theme changes based on the current weather type(cloudy, rainy, sunny).
