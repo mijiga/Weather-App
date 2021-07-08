@@ -34,7 +34,6 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
 
-    
     private val TAG = "MainActivity"
 
     @Inject
