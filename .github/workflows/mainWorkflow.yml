@@ -11,17 +11,13 @@ on:
 
 jobs:
 
-  detekt:
+  ktlint:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Setup detekt
-        uses: peter-murray/setup-detekt@v1
-        with:
-          detekt_version: 1.15.0
-
-      - name: Run detektAll
-        run: detekt --version
+      -
+      - name: Run ktlinCheck
+        run: ./gradlew ktlinCheck
 
   test_job:
     runs-on: ubuntu-latest

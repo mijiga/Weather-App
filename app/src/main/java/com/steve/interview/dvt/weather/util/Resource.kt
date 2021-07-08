@@ -1,7 +1,5 @@
 package com.steve.interview.dvt.weather.util
 
-import java.util.*
-
 sealed class Resource<T>(
     val data: T? = null,
     val message: String? = null
