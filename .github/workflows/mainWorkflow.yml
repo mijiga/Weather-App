@@ -20,7 +20,7 @@ jobs:
         with:
           detekt_version: 1.15.0
 
-      - name: Run detekt
+      - name: Run detektAll
         run: detekt --version
 
   test_job:
