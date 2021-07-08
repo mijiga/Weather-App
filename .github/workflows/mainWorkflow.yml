@@ -16,7 +16,7 @@ jobs:
 
     steps:
       - name: Run ktlinCheck
-        run: ./gradlew ktlinCheck
+        run: ./gradlew ktlintCheck
 
   test_job:
     runs-on: ubuntu-latest
