@@ -10,7 +10,6 @@ class FakeLocationRepository : LocationRepository {
     }
 
     override fun setLatitude(latitude: Double) {
-
     }
 
     override fun getLongitude(): Double {
@@ -18,8 +17,5 @@ class FakeLocationRepository : LocationRepository {
     }
 
     override fun setLongitude(longitude: Double) {
-
     }
-
-
 }

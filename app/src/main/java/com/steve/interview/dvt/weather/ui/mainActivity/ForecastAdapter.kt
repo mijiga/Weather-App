@@ -62,4 +62,3 @@ class ForecastAdapter : RecyclerView.Adapter<ForecastAdapter.ViewHolder>() {
         }
     }
 }
-
