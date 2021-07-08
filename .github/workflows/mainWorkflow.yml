@@ -16,7 +16,7 @@ jobs:
 
     steps:
       - name: Setup detekt
-        uses: arturbosch/setup-detekt@v1
+        uses: peter-murray/setup-detekt@v1
         with:
           detekt_version: 1.15.0
 
