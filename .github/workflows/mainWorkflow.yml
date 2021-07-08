@@ -11,7 +11,17 @@ on:
 
 jobs:
 
-  
+  detekt:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup detekt
+        uses: peter-murray/setup-detekt@v1
+        with:
+          detekt_version: 1.17.1
+
+      - name: Run detekt
+        run: detekt --version
 
   test_job:
     runs-on: ubuntu-latest
