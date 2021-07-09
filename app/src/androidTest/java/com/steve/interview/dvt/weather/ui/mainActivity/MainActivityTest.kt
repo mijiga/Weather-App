@@ -13,8 +13,6 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import com.steve.interview.dvt.weather.R
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.delay
 import org.hamcrest.CoreMatchers
 import org.hamcrest.Matcher
 import org.junit.Rule

@@ -45,7 +45,6 @@ class ForecastAdapter : RecyclerView.Adapter<ForecastAdapter.ViewHolder>() {
     }
 
     private fun getIcon(weatherCode: Int): Int {
-
         return when (weatherCode) {
             in Constants.CLEAR_RANGE -> {
                 R.drawable.clear
@@ -62,4 +61,3 @@ class ForecastAdapter : RecyclerView.Adapter<ForecastAdapter.ViewHolder>() {
         }
     }
 }
-

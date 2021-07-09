@@ -1,7 +1,7 @@
 package com.steve.interview.dvt.weather.data.model
 
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
 
 data class CurrentWeather(
     val base: String,
